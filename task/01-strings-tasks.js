@@ -203,7 +203,7 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
     return '┌' + '─'.repeat(width - 2) + '┐\n' +
-           '│' + ' '.repeat(width - 2) + '│\n' +
+          ('│' + ' '.repeat(width - 2) + '│\n').repeat(height - 2) +
            '└' + '─'.repeat(width - 2) + '┘\n';  
 }
 
@@ -224,7 +224,7 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    str.replace(/[a-zA-Z]/g,function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);});
+    return str.replace(/[a-zA-Z]/g,function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);});
 }
 
 /**
@@ -271,22 +271,25 @@ function isString(value) {
  */
 function getCardId(value) {
     var result;
+    
     switch (value.charAt(0)) {
         case 'A': result = 1; break;
         case '1': result = 10; break;
         case 'J': result = 11; break;
         case 'Q': result = 12; break;
         case 'K': result = 13; break;
-    }
+        default:  result = value.charAt(0);break;
+    };
     result = parseInt(result);
+    
     switch (value.slice(-1)) {
-        case '♣': result -= 1; break;
-        case '♦': result += 12; break;
-        case '♥': result += 25; break;
-        case '♠': result += 38; break;
+        case '♣': result -= +1; break;
+        case '♦': result += +12; break;
+        case '♥': result += +25; break;
+        case '♠': result += +38; break;
     }
-    return result;
-}
+    return  result;
+} 
 
 
 module.exports = {
