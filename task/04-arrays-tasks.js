@@ -38,10 +38,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   var arr = [];
-   for(var i = 0; i < len; i++)
-       arr.push(2*i + 1)
-   return arr; 
+   return Array.apply(null, Array(len)).map(function (_, i) {return 2*i+1;});
 }
 
 
@@ -149,7 +146,8 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-   return arr.splice(item, 0, index);
+   arr.splice(item, 0, index);
+   return arr;
 }
 
 /**
