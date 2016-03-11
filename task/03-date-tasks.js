@@ -97,7 +97,7 @@ function angleBetweenClockHands(date) {
     var h = date.getHours();
     h = (h < 12) ? h : h - 12;
     var min = date.getMinutes();
-    var angle = Math.abs(1/2 * (60 * h - 11 * min))
+    var angle = Math.abs(1/2 * (60 * h - 11 * min));
     return ((angle > 180) ? 360 - angle : angle) /180 * Math.PI;  
 }
 
