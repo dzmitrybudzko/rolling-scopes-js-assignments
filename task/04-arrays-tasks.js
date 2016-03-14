@@ -275,8 +275,8 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-    arr.map(function(x, ind){arr.splice(ind, 1, Array.apply(null, Array(ind + 1)).map(a => x)); return arr});
-    return [].concat.call(arr);
+        arr.map(function(x, ind){arr.splice(ind, 1, Array(ind+1).fill(x)); return arr});
+        return arr;
 }
 
 
@@ -295,10 +295,10 @@ function propagateItemsByPositionIndex(arr) {
  */
 function get3TopItems(arr) {
     var rez = [];
-    rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0]);
-    rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0]);
-    rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0]);
-    return rez
+    if (arr.length !=0) {rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0])};
+    if (arr.length !=0) {rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0])};
+    if (arr.length !=0) {rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0])};
+    return rez;
 }
  
  
@@ -315,7 +315,7 @@ function get3TopItems(arr) {
  *   [ null, 1, 'elephant' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+    return arr.filter(x => x>0 && Number.isFinite(x)).length;
 }
  
 /** 
