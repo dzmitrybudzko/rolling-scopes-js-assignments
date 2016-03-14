@@ -429,10 +429,10 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-    arr.sort(function(a,b) {
-        return String.charCodeAt(a.country[0]) - String.charCodeAt(b.country[0]) || String.charCodeAt(a.city[0]) - String.charCodeAt(b.city[0])
+   arr.sort(function(a,b) {
+        return (a.country > b.country) - (a.country < b.country) ||  (a.city > b.city) - (a.city < b.city)
     })
-     return arr;
+    return arr;
 }
 
 /**
