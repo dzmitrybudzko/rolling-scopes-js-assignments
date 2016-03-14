@@ -275,8 +275,9 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-        arr.map(function(x, ind){arr.splice(ind, 1, Array(ind+1).fill(x)); return arr});
-        return arr;
+       throw new Error('Not implemented');
+       // arr.map(function(x, ind){arr.splice(ind, 1, Array(ind+1).fill(x)); return arr});
+        //return arr;
 }
 
 
@@ -397,7 +398,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   throw new Error('Not implemented');
+   return arr.join(",");
 }
 
 
