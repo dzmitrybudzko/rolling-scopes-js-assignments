@@ -201,7 +201,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-   return arr.map(x => x.join(',')).join('\n + ' ); 
+   return arr.map(x => x.join(',')).join('\n' ); 
    
 }
 
@@ -528,7 +528,9 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+  var myMap = new Map(arr);
+  myMap.set(keySelector, valueSelector);
+  return myMap;
 }
 
 
