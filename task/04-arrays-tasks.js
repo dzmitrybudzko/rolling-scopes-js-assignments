@@ -275,7 +275,8 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-   return arr.map((x, ind) => x.toString().repeat(ind + 1));
+    arr.map(function(x, ind){arr.splice(ind, 1, Array.apply(null, Array(ind + 1)).map(a => x)); return arr});
+    return arr;
 }
 
 
@@ -293,7 +294,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   throw new Error('Not implemented');
+   return
 }
  
  
