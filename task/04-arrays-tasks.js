@@ -429,7 +429,10 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+    arr.sort(function(a,b) {
+        return String.charCodeAt(a.country[0]) - String.charCodeAt(b.country[0]) || String.charCodeAt(a.city[0]) - String.charCodeAt(b.city[0])
+    })
+     return arr;
 }
 
 /**
