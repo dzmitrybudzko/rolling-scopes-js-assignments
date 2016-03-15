@@ -270,7 +270,12 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+  function func(num){
+    if (num < 9)  return num ;
+    func(num.toString().split('').reduce((a,b)=>Number(a)+Number(b)))
+  }
+
+  func(num)
 }
 
 
