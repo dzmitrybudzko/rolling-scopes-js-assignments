@@ -117,8 +117,8 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(a, b) {
-      
-    return 
+     throw new Error('Not implemented'); 
+    //return 
 }
 
 
