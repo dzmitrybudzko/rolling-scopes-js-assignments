@@ -251,7 +251,9 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    return ccn.toString().split('').map((x,i) => (i%2==0 && 2*x > 9)? 2*x - 9 : x).reduce(function(a, b) { return Number(a) + Number(b); }) %10 == 0;
+    return ((ccn.toString().split('').length %2 ==0) ?
+    ccn.toString().split('').map((x,i) => (i%2==0 && 2*x > 9)? 2*x - 9 :x)
+    : ccn.toString().split('').map((x,i) => (i%2!==0 && 2*x > 9)? 2*x - 9 :x)).reduce(function(a, b) { return Number(a) + Number(b); }) %10 ==0
 }
 
 
