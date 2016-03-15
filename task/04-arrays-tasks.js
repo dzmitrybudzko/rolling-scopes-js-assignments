@@ -529,7 +529,6 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
    var map = new Map();
-        
         array.map(function(x,i){
           var key = keySelector(x);
           var value = valueSelector(x);
@@ -538,8 +537,6 @@ function group(array, keySelector, valueSelector) {
           else
                 map.set(key, [value]);
         })
-        
-
         return map;
 }
 
