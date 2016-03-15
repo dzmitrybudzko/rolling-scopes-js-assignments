@@ -530,15 +530,15 @@ function distinct(arr) {
 function group(array, keySelector, valueSelector) {
    var map = new Map();
         
-        for (var i = 0; i < array.length; i++) {
-            var element = array[i];
-            var key = keySelector(element);
-            var value = valueSelector(element);
-            if (map.has(key))
+        array.map(function(x,i){
+          var key = keySelector(x);
+          var value = valueSelector(x);
+          if (map.has(key))
                 map.get(key).push(value);
-            else
+          else
                 map.set(key, [value]);
-        }
+        })
+        
 
         return map;
 }
