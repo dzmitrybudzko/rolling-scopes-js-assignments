@@ -53,7 +53,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   return /(.+)[si](.+)/;
+   return /s.+|.+i.+/;
 }
 
 
