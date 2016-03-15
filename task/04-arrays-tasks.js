@@ -528,9 +528,19 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-  var myMap = new Map(arr);
-  
-  return myMap;
+   var map = new Map();
+        
+        for (var i = 0; i < array.length; i++) {
+            var element = array[i];
+            var key = keySelector(element);
+            var value = valueSelector(element);
+            if (map.has(key))
+                map.get(key).push(value);
+            else
+                map.set(key, [value]);
+        }
+
+        return map;
 }
 
 
