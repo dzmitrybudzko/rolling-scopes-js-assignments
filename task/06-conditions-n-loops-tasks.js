@@ -82,7 +82,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    return a + b > c || a + c > b || b + c > a;
+    return a + b > c && a + c > b && b + c > a;
 }
 
 
@@ -148,7 +148,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    return
+    return (point.x-circle.x)*(point.x-circle.x) + (point.y-circle.y)*(point.x-circle.x) < circle.radius*circle.radius;
 }
 
 
