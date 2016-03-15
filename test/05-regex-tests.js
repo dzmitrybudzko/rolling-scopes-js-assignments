@@ -25,7 +25,6 @@ describe('05-regex-tasks', function() {
             '{D1A5279D-B27D-4CD4-A05E-EFDH53D08E8D}',
             '{5EDEB36C-9006-467A8D04-AFB6F62CD7D2}',
             '677E2553DD4D43B09DA77414DB1EB8EA',
-            '0c74f13f-fa83-4c48-9b33-68921dd72463',
             'The roof, the roof, the roof is on fire'
         ].forEach((str) => {
              assert(
