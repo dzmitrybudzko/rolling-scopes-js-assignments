@@ -53,7 +53,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   return /s.+|.+i.+/;
+   return /s.+|.+i.+/
 }
 
 
@@ -72,7 +72,7 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   return /[012]{1,3}.[012]{1,3}.[012]{1,3}.[012]{1,3}/'
+   return /[012]{1,3}.[012]{1,3}.[012]{1,3}.[012]{1,3}/
 }
 
 
