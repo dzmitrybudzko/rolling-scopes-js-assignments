@@ -529,7 +529,7 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   var myMap = new Map(arr);
-  myMap.set(keySelector, valueSelector);
+  
   return myMap;
 }
 
