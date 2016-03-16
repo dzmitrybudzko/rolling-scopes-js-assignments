@@ -253,7 +253,7 @@ function reverseInteger(num) {
 function isCreditCardNumber(ccn) {
     var arr = ccn.toString().split('').reverse(); 
     arr = arr.map(function(x,i){
-        if (i%2 !==0)   return (2*x > 9) ? 2*x - 9 : 2*x;
+        if (i%2 !== 0)   return (2*x > 9) ? 2*x - 9 : 2*x;
         return x;
     });
     return arr.reduce((a, b)=> Number(a) + Number(b)) %10 === 0;
@@ -275,10 +275,12 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    if (num < 9)  return num ;
-    getDigitalRoot(num.toString().split('').reduce((a,b)=>Number(a)+Number(b)));
-  
-}
+    if (num < 9) 
+        return num ;
+    num = num.toString().split('').reduce((a,b)=>Number(a)+Number(b));
+    
+    getDigitalRoot(num);
+  }
 
 
 /**
@@ -339,7 +341,19 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+   var t = Date.parse(endDate) - Date.parse(startDate); 
+   if (t < 45000) return 'a few seconds ago';
+   if (45001 < t && t < 90000) return 'a minute ago';
+   if (90001 < t && t < 45*60*1000) return '2 minutes ago ... 45 minutes ago';
+   if (45*60*1000 + 1 < t && t < 90*60*1000) return 'an hour ago';    
+   if (90*60*1000 + 1 < t && t < 22*60*60*1000) return '2 hours ago ... 22 hours ago';
+   if (22*60*60*1000 + 1 < t && t < 36*60*60*1000) return 'a day ago';
+   if (36*60*60*1000 + 1 < t && t < 25*24*60*60*1000) return '2 days ago ... 25 days ago';
+   if (25*24*60*60*1000 + 1 < t && t < 45*24*60*60*1000) return 'a month ago';
+   if (45*24*60*60*1000 + 1 < t && t < 345*24*60*60*1000) return '2 months ago ... 11 months ago';
+   if (345*24*60*60*1000 + 1 < t && t < 545*24*60*60*1000) return 'a year ago';
+   if (t > 545*24*60*60*1000 + 1) return '2 years ago ... 20 years ago';
+   
 }
 
 
