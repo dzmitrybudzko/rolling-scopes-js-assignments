@@ -117,8 +117,12 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(a, b) {
-     throw new Error('Not implemented'); 
-    //return 
+    function isInsideRectangle(x,y) {
+        return (x >= a.left && x <= a.left + a.width && y >= a.top && y <= a.top + a.height);    
+    }
+    return isInsideRectangle(b.left, b.top) || isInsideRectangle(b.left + b.width, b.top) 
+    || isInsideRectangle(b.left, b.top + b.height) || isInsideRectangle(b.left + b.width, b.top + b.height);
+    
 }
 
 
