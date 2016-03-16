@@ -486,14 +486,14 @@ function getMatrixProduct(m1, m2) {
 function evaluateTicTacToePosition(position) {
     var win;
    var check = position.some(function(a, i, arr){    
-      win = arr[2][i];
+      win = arr[i][0];
       return (arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2] && arr[i][0] !== undefined) ;
     });
 
     if (check) return win;
 
     check = position.some(function(a, i, arr){    
-      win = arr[i][2];
+      win = arr[0][i];
       return (arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i] && arr[0][i] !== undefined) ;
     });
 
