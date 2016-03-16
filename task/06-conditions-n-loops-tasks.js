@@ -305,7 +305,17 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+  
+	    for (var d = /(\u005B|\u0028|\u007B)[^\u005B\u0028\u007B]*?$/,
+	     e = {
+	        "(": /\u0028[^\u007D\u005D]*?\u0029/,
+	        "[": /\u005B[^\u0029\u007D]*?\u005D/,
+	        "{": /\u007B[^\u0029\u005D]*?\u007D/
+	    }, b, c = !0; c;) b = str, str = str.replace(d, function (a, b) {
+	        return a.replace(e[b], "")
+	    }), b == str && (c = !1);
+	    return !/[\u005B\u005D\u0028\u0029\u007B\u007D]/.test(str)
+
 }
 
 
@@ -341,7 +351,7 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-var t = Date.parse(Date(endDate)) - Date.parse(Date(startDate));
+var t = Date.parse(endDate) - Date.parse(startDate);
    if (t < 45000) return 'a few seconds ago';
    if (45001 < t && t < 90000) return 'a minute ago';
    if (90001 < t && t < 45*60*1000) return Math.floor(t/(1000*60)) + ' minutes ago';
