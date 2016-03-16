@@ -480,14 +480,14 @@ function evaluateTicTacToePosition(position) {
     if (position.some(function(a, i, arr){    
             win = arr[0][i];        
             return (arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i]) ;
-        }) && !win) return win;
+        }) && win !== undefined) return win;
     if (position.some(function(a, i, arr){    
             win = arr[i][0];        
             return (arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2]) ;
-        }) && !win) return win;
+        }) && win !== undefined) return win;
    
-   if(position[0][0] === position[1][1] && position[1][1] === position[2][2] && position[2][2] != undefined) return position[0][0];
-   if(position[0][2] === position[1][1] && position[1][1] === position[2][0] && position[2][2] != undefined) return position[1][1];
+   if(position[0][0] === position[1][1] && position[1][1] === position[2][2] && position[2][2] !== undefined) return position[0][0];
+   if(position[0][2] === position[1][1] && position[1][1] === position[2][0] && position[2][2] !== undefined) return position[1][1];
     return undefined;
 }
 
