@@ -305,12 +305,9 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
- var nextChar;
- var ind = Math.max(str.lastIndexOf('['), str.lastIndexOf('{'), str.lastIndexOf('('),str.lastIndexOf('<'));
  if (str.length === 0) return true;
- if (str.charAt(ind) === '(') { nextChar = ')'
-    } else { nextChar = String.fromCharCode(str.charCodeAt(ind)+2)
- };
+ var ind = Math.max(str.lastIndexOf('['), str.lastIndexOf('{'), str.lastIndexOf('('),str.lastIndexOf('<'));
+ var nextChar = (str.charAt(ind) === '(') ? ')' : String.fromCharCode(str.charCodeAt(ind)+2);
  if (str.charAt(ind+1) !== nextChar) return false;
  str = str.substring(0,ind) + str.substring(ind+2);
  return isBracketsBalanced(str) 
@@ -402,7 +399,15 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    var common = '';
+    for (var i = 0; i < pathes[0].length; i++ ) {
+        for (var j = 1; j < pathes.length; j++) {
+            if (pathes[0].charAt(i) !== pathes[j].charAt(i))
+                return common.substring(0, common.lastIndexOf('/')+1); 
+        }
+        common = common + pathes[0].charAt(i);
+    }
+    return common.substring(0, common.lastIndexOf('/')+1);
 }
 
 
