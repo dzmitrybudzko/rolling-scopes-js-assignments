@@ -278,8 +278,8 @@ function getDigitalRoot(num) {
     if (num < 9) 
         return num ;
     num = num.toString().split('').reduce((a,b)=>Number(a)+Number(b));
+    return getDigitalRoot(num);
     
-    getDigitalRoot(num);
   }
 
 
@@ -341,18 +341,19 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-   var t = Date.parse(endDate) - Date.parse(startDate); 
+var t = Date.parse(endDate.substring(0,10) + 'T' + endDate.substring(11)) - 
+        Date.parse(startDate.substring(0,10) + 'T' + startDate.substring(11));
    if (t < 45000) return 'a few seconds ago';
    if (45001 < t && t < 90000) return 'a minute ago';
-   if (90001 < t && t < 45*60*1000) return '2 minutes ago ... 45 minutes ago';
+   if (90001 < t && t < 45*60*1000) return Math.floor(t/(1000*60)) + ' minutes ago';
    if (45*60*1000 + 1 < t && t < 90*60*1000) return 'an hour ago';    
-   if (90*60*1000 + 1 < t && t < 22*60*60*1000) return '2 hours ago ... 22 hours ago';
+   if (90*60*1000 + 1 < t && t < 22*60*60*1000) return Math.floor(t/(60*60*1000)) + ' hours ago';
    if (22*60*60*1000 + 1 < t && t < 36*60*60*1000) return 'a day ago';
-   if (36*60*60*1000 + 1 < t && t < 25*24*60*60*1000) return '2 days ago ... 25 days ago';
+   if (36*60*60*1000 + 1 < t && t < 25*24*60*60*1000) return Math.floor(t/(24*60*60*1000)) + ' days ago';
    if (25*24*60*60*1000 + 1 < t && t < 45*24*60*60*1000) return 'a month ago';
-   if (45*24*60*60*1000 + 1 < t && t < 345*24*60*60*1000) return '2 months ago ... 11 months ago';
+   if (45*24*60*60*1000 + 1 < t && t < 345*24*60*60*1000) return Math.floor(t/(12*24*60*60*1000)) + ' months ago';
    if (345*24*60*60*1000 + 1 < t && t < 545*24*60*60*1000) return 'a year ago';
-   if (t > 545*24*60*60*1000 + 1) return '2 years ago ... 20 years ago';
+   if (t > 545*24*60*60*1000 + 1) return Math.floor(t/(365*24*60*60*1000)) + ' years ago';
    
 }
 
