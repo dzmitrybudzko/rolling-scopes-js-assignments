@@ -119,8 +119,7 @@ function isTriangle(a,b,c) {
 function doRectanglesOverlap(a, b) {
     function isInsideRectangleA(x,y) {
         return (x >= a.left && x <= a.left + a.width && y >= a.top && y <= a.top + a.height);    
-    }
-    
+    }  
     function isInsideRectangleB(x,y) {
         return (x >= b.left && x <= b.left + b.width && y >= b.top && y <= b.top + b.height);    
     }
@@ -486,17 +485,22 @@ function getMatrixProduct(m1, m2) {
  */
 function evaluateTicTacToePosition(position) {
     var win;
-    if (position.some(function(a, i, arr){    
-            win = arr[0][i];        
-            return (arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i]) ;
-        }) && win !== undefined) return win;
-    if (position.some(function(a, i, arr){    
-            win = arr[i][0];        
-            return (arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2]) ;
-        }) && win !== undefined) return win;
-   
-   if(position[0][0] === position[1][1] && position[1][1] === position[2][2] && position[2][2] !== undefined) return position[0][0];
-   if(position[0][2] === position[1][1] && position[1][1] === position[2][0] && position[2][2] !== undefined) return position[1][1];
+   var check = position.some(function(a, i, arr){    
+      win = arr[2][i];
+      return (arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2] && arr[i][0] !== undefined) ;
+    });
+
+    if (check) return win;
+
+    check = position.some(function(a, i, arr){    
+      win = arr[i][2];
+      return (arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i] && arr[0][i] !== undefined) ;
+    });
+
+    if (check) return win;
+    if(position[0][0] === position[1][1] && position[1][1] === position[2][2] && position[2][2] !== undefined) return position[0][0];
+    if(position[0][2] === position[1][1] && position[1][1] === position[2][0] && position[2][2] !== undefined) return position[1][1];
+    
     return undefined;
 }
 
