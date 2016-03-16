@@ -477,10 +477,15 @@ function getMatrixProduct(m1, m2) {
  */
 function evaluateTicTacToePosition(position) {
 
-   position.forEach(function(a,i){    
-       if(a[0] === a[1] && a[1] ===a[2]) return a[0];
-       if(position[0][i] === position[1][i] && position[1][i] === position[2][i]) return position[0][i];        
-   });
+    var win;
+    if (position.some(function(a, i, arr){    
+            win = arr[0][i];        
+            return (arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i]) ;
+        })) return win;
+    if (position.some(function(a, i, arr){    
+            win = arr[i][0];        
+            return (arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2]) ;
+        })) return win;
    
    if(position[0][0] === position[1][1] && position[1][1] === position[2][2]) return position[0][0];
    if(position[0][2] === position[1][1] && position[1][1] === position[2][0]) return position[1][1];
