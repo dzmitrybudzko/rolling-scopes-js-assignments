@@ -308,14 +308,12 @@ function isBracketsBalanced(str) {
  var nextChar;
  var ind = Math.max(str.lastIndexOf('['), str.lastIndexOf('{'), str.lastIndexOf('('),str.lastIndexOf('<'));
  if (str.length === 0) return true;
- if(str.charAt(ind) === '(') {nextChar = ')'
-    } else {nextChar = String.fromCharCode(str.charCodeAt(ind)+2)
+ if (str.charAt(ind) === '(') { nextChar = ')'
+    } else { nextChar = String.fromCharCode(str.charCodeAt(ind)+2)
  };
  if (str.charAt(ind+1) !== nextChar) return false;
  str = str.substring(0,ind) + str.substring(ind+2);
  return isBracketsBalanced(str) 
-}
-
 }
 
 
