@@ -341,7 +341,7 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-var t = Date.parse(endDate) - Date.parse(startDate);
+var t = Date.parse(Date(endDate)) - Date.parse(Date(startDate));
    if (t < 45000) return 'a few seconds ago';
    if (45001 < t && t < 90000) return 'a minute ago';
    if (90001 < t && t < 45*60*1000) return Math.floor(t/(1000*60)) + ' minutes ago';
@@ -377,7 +377,7 @@ var t = Date.parse(endDate) - Date.parse(startDate);
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+   return num.toString(n);
 }
 
 
