@@ -73,7 +73,7 @@ function getRegexForPitSpot() {
  */
 function getRegexForIPv4() {
 
-   return /^(([0-9]|[0-9][0-9]|[012][0-9][0-9])\.){3}([0-9]|[0-9][0-9]|[012][0-9][0-9])$/gm
+   return /^(([0-9]|[0-9][0-9]|[012][0-9][0-9])\.){3}([0-9]|[0-9][0-9]|[012][0-9][0-9])$/
 }
 
 
@@ -118,7 +118,7 @@ function getRegexForSSN() {
  */
 function getPasswordValidator(minLength) {
   
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{minLength,}$/gm
+  return /^(?=.*[a-z]+)(?=.*[A-Z]+)(?=.*\d+)[a-zA-Z\d]{minLength,}$/
 }
 
 
