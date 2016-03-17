@@ -355,7 +355,7 @@ function isBracketsBalanced(str) {
  */
 function timespanToHumanString(startDate, endDate) {
 var t = Date.parse(endDate) - Date.parse(startDate);
-   if (t < 45000) return 'a few seconds ago';
+   if (t <= 45000) return 'a few seconds ago';
    if (45001 < t && t < 90000) return 'a minute ago';
    if (90001 < t && t < 45*60*1000) return Math.floor(t/(1000*60)) + ' minutes ago';
    if (45*60*1000 + 1 < t && t < 90*60*1000) return 'an hour ago';    
