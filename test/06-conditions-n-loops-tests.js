@@ -467,7 +467,7 @@ it.optional('getDigitalRoot should return the cyclic sum of all digits', () => {
     });
 
 
-    it.optional('timespanToHumanString should return the human string representation of datetime period', () => {
+it.optional('timespanToHumanString should return the human string representation of datetime period', () => {
         [
             {
                 startDate: '2000-01-01 01:00:00.100',
@@ -584,15 +584,15 @@ it.optional('getDigitalRoot should return the cyclic sum of all digits', () => {
             },{
                 startDate: '2000-01-01 00:00:00.000',
                 endDate:   '2000-12-12 00:00:00.000',
-                expected:  'an year ago'
+                expected:  'a year ago'
             },{
                 startDate: '2000-01-01 00:00:00.000',
                 endDate:   '2001-02-15 00:00:00.001',
-                expected:  'an year ago'
+                expected:  'a year ago'
             },{
                 startDate: '2000-01-01 00:00:00.000',
                 endDate:   '2001-06-01 00:00:00.001',
-                expected:  'an year ago'
+                expected:  'a year ago'
             },{
                 startDate: '2000-01-01 00:00:00.000',
                 endDate:   '2015-02-15 00:00:00.001',
