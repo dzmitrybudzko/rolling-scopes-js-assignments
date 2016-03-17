@@ -73,7 +73,7 @@ function getRegexForPitSpot() {
  */
 function getRegexForIPv4() {
 
-   return /^(([0-9]|[1-9][1-9]|[012][1-9][1-9])\.){3}([0-9]|[0-9][0-9]|[012][0-9][0-9])$/
+   return /^(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))$/
 }
 
 
@@ -116,9 +116,9 @@ function getRegexForSSN() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(yminLength) {
+function getPasswordValidator(minLength) {
   
-  return /^(?=.*[a-z]+)(?=.*[A-Z]+)(?=.*\d+)[a-zA-Z\d]{6,}$/
+  return /^(?=.*[a-z]+)(?=.*[A-Z]+)(?=.*\d+)[a-zA-Z\d]{minlength,}$/
 }
 
 
