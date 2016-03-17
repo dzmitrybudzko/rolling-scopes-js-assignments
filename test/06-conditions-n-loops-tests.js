@@ -470,36 +470,36 @@ it.optional('getDigitalRoot should return the cyclic sum of all digits', () => {
 it.optional('timespanToHumanString should return the human string representation of datetime period', () => {
         [
             {
-                startDate: '2000-01-01T01:00:00.100',
-                endDate:   '2000-01-01T01:00:00.200',
+                startDate: '2000-01-01 01:00:00.100',
+                endDate:   '2000-01-01 01:00:00.200',
                 expected:  'a few seconds ago'
             }, {
-                startDate: '2000-01-01T01:00:00.000',
-                endDate:   '2000-01-01T01:00:30.000',
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:00:30.000',
                 expected:  'a few seconds ago'
             }, {
-                startDate: '2000-01-01T01:00:00.000',
-                endDate:   '2000-01-01T01:00:45.000',
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:00:45.000',
                 expected:  'a few seconds ago'
             }, {
-                startDate: '2000-01-01T01:00:00.000',
-                endDate:   '2000-01-01T01:00:45.001',
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:00:45.001',
                 expected:  'a minute ago'
             }, {
-                startDate: '2000-01-01T01:00:00.000',
-                endDate:   '2000-01-01T01:01:00.000',
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:01:00.000',
                 expected:  'a minute ago'
             }, {
-                startDate: '2000-01-01T01:00:00.000',
-                endDate:   '2000-01-01T01:01:30.000',
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:01:30.000',
                 expected:  'a minute ago'
             }, {
-                startDate: '2000-01-01T01:00:00.000',
-                endDate:   '2000-01-01T01:01:30.001',
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:01:30.001',
                 expected:  '2 minutes ago'
             }, {
-                startDate: '2000-01-01T01:00:00.000',
-                endDate:   '2000-01-01T01:05:30.000',
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:05:30.000',
                 expected:  '5 minutes ago'
             },{
                 startDate: '2000-01-01T01:00:00.000',
