@@ -470,132 +470,132 @@ it.optional('getDigitalRoot should return the cyclic sum of all digits', () => {
 it.optional('timespanToHumanString should return the human string representation of datetime period', () => {
         [
             {
-                startDate: '2000-01-01 01:00:00.100',
-                endDate:   '2000-01-01 01:00:00.200',
+                startDate: '2000-01-01T01:00:00.100',
+                endDate:   '2000-01-01T01:00:00.200',
                 expected:  'a few seconds ago'
             }, {
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:00:30.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:00:30.000',
                 expected:  'a few seconds ago'
             }, {
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:00:45.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:00:45.000',
                 expected:  'a few seconds ago'
             }, {
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:00:45.001',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:00:45.001',
                 expected:  'a minute ago'
             }, {
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:01:00.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:01:00.000',
                 expected:  'a minute ago'
             }, {
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:01:30.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:01:30.000',
                 expected:  'a minute ago'
             }, {
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:01:30.001',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:01:30.001',
                 expected:  '2 minutes ago'
             }, {
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:05:30.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:05:30.000',
                 expected:  '5 minutes ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:45:00.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:45:00.000',
                 expected:  '45 minutes ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 01:45:00.001',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T01:45:00.001',
                 expected:  'an hour ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 02:00:00.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T02:00:00.000',
                 expected:  'an hour ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 02:30:00.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T02:30:00.000',
                 expected:  'an hour ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 02:30:00.001',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T02:30:00.001',
                 expected:  '2 hours ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 05:30:00.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T05:30:00.000',
                 expected:  '4 hours ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 05:30:00.001',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T05:30:00.001',
                 expected:  '5 hours ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 23:00:00.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T23:00:00.000',
                 expected:  '22 hours ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-01 23:00:00.001',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T23:00:00.001',
                 expected:  'a day ago'
             },{
-                startDate: '2000-01-01 01:00:00.000',
-                endDate:   '2000-01-02 01:00:00.000',
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-02T01:00:00.000',
                 expected:  'a day ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-01-02 12:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-01-02T12:00:00.000',
                 expected:  'a day ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-01-02 12:00:00.001',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-01-02T12:00:00.001',
                 expected:  '2 days ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-01-05 12:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-01-05T12:00:00.000',
                 expected:  '4 days ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-01-26 00:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-01-26T00:00:00.000',
                 expected:  '25 days ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-01-26 00:00:00.001',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-01-26T00:00:00.001',
                 expected:  'a month ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-02-01 00:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-02-01T00:00:00.000',
                 expected:  'a month ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-02-15 00:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-02-15T00:00:00.000',
                 expected:  'a month ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-02-16 00:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-02-16T00:00:00.000',
                 expected:  '2 months ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-05-20 00:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-05-20T00:00:00.000',
                 expected:  '5 months ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-12-10 00:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-12-10T00:00:00.000',
                 expected:  '11 months ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2000-12-12 00:00:00.000',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-12-12T00:00:00.000',
                 expected:  'a year ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2001-02-15 00:00:00.001',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2001-02-15T00:00:00.001',
                 expected:  'a year ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2001-06-01 00:00:00.001',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2001-06-01T00:00:00.001',
                 expected:  'a year ago'
             },{
-                startDate: '2000-01-01 00:00:00.000',
-                endDate:   '2015-02-15 00:00:00.001',
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2015-02-15T00:00:00.001',
                 expected:  '15 years ago'
             }
         ].forEach(data => {
