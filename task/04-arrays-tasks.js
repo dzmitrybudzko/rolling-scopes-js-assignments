@@ -241,7 +241,8 @@ function getMovingSum(arr) {
     result.push(sum);
     return sum + x;
   });
-  return result.push(totalSum);
+  result.push(totalSum);
+  return result;
 }
 
 /**
@@ -366,7 +367,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   return arr.filter(x => (x)).length;
+   return arr.filter(x => (x)?false:true).length;
 }
 
 /**
