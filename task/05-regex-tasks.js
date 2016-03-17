@@ -72,8 +72,8 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
- //throw new Error('Not implemented');
-   return /(([0-9]|[0-9][0-9]|[012][0-9][0-9])\.){3}[0-9]|[0-9][0-9]|[012][0-9][0-9]/
+
+   return /(([0-9]|[0-9][0-9]|[012][0-9][0-9])\.){3}([0-9]|[0-9][0-9]|[012][0-9][0-9])/
 }
 
 
