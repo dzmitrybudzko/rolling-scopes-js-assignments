@@ -64,11 +64,11 @@ describe('05-regex-tasks', function() {
         var result = tasks.getRegexForIPv4();
 
         [
-            '0.0.0.0',
-            '127.0.0.1',
-            '10.10.1.1',
-            '46.61.155.237',
-            '010.234.015.001',
+            '300.0.0.0',
+            '127.0.0.-1',
+            '23.24.25.26.27',
+            'Set dns to 8.8.8.8'
+            
             
         ].forEach((str) => {
             assert(
@@ -78,10 +78,11 @@ describe('05-regex-tasks', function() {
         });
 
         [
-            //'300.0.0.0',
-            '127.0.0.-1',
-            '23.24.25.26.27',
-            'Set dns to 8.8.8.8'
+            '0.0.0.0',
+            '127.0.0.1',
+            '10.10.1.1',
+            '46.61.155.237',
+            '010.234.015.001',
         ].forEach((str) => {
             assert.equal(
                 result.test(str) == false,
