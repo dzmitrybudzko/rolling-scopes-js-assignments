@@ -455,10 +455,11 @@ function sortCitiesArray(arr) {
  */
 function getIdentityMatrix(n) {
    var arr = Array(n).fill(0);
-   return arr.map(function(x, i){
+   arr.map(function(x, i){
        arr.splice(i, 1, Array(n).fill(0).fill(1, i, i + 1));
        return arr;
    });
+   return arr;
  
 }
 
