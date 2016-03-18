@@ -43,6 +43,7 @@ function* get99BottlesOfBeer() {
     yield('Take one down and pass it around, no more bottles of beer on the wall.');
     yield('No more bottles of beer on the wall, no more bottles of beer.');
     yield('Go to the store and buy some more, 99 bottles of beer on the wall.');
+    
 }
 
 
@@ -97,18 +98,7 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    let stack = [];
-    stack.push(root);
-
-    while (stack.length) {
-        let item = stack.pop();
-        yield item;
-        if (item.children) {
-            item.children.reverse().forEach((child) => { 
-                stack.push(child)
-            });
-        }
-    }
+ throw new Error('Not implemented');
 }
 
 
