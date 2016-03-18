@@ -297,11 +297,8 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-    var rez = [];
-    if (arr.length !=0) {rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0])};
-    if (arr.length !=0) {rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0])};
-    if (arr.length !=0) {rez.push(arr.splice(arr.indexOf(Math.max.apply(null,arr)), 1)[0])};
-    return rez;
+    // сам в шоке от себя, что написал такой предыдущий вариант
+    return arr.sort((a,b) => b-a).slice(0, 3);
 }
  
  
@@ -335,9 +332,10 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-    var mapped1 = {0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7:'seven', 8:'eight', 9: 'nine'};
-    var mapped2 = {'zero' :0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9};
-    return arr.map(x => mapped2[x]).sort().map(x => mapped1[x])
+    return arr.sort((a, b) => {
+        var mapped = {'zero' :0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9};
+        return mapped[a] - mapped[b];
+    });
 }
 
 /** 
