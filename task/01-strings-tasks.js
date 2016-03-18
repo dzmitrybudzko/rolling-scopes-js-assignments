@@ -224,7 +224,12 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    return str.replace(/[a-zA-Z]/g,function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);});
+    const lettersCount = 26;
+    const lowercaseOffset = 'z'.charCodeAt(0);
+    const uppercaseOffset = 'Z'.charCodeAt(0);
+    return str.replace(/[a-zA-Z]/g,function(c){
+        return String.fromCharCode(( c <= "Z" ? uppercaseOffset : lowercaseOffset) >= (c=c.charCodeAt(0) + 13) ? c : c - lettersCount);
+   });
 }
 
 /**
@@ -241,7 +246,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return typeof value === "string" ? true : value instanceof String;
+    return typeof value === "string" || value instanceof String;
 }
 
 
@@ -270,25 +275,7 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    var result;
-    
-    switch (value.charAt(0)) {
-        case 'A': result = 1; break;
-        case '1': result = 10; break;
-        case 'J': result = 11; break;
-        case 'Q': result = 12; break;
-        case 'K': result = 13; break;
-        default:  result = value.charAt(0);break;
-    };
-    result = parseInt(result);
-    
-    switch (value.slice(-1)) {
-        case '♣': result -= +1; break;
-        case '♦': result += +12; break;
-        case '♥': result += +25; break;
-        case '♠': result += +38; break;
-    }
-    return  result;
+   return '♣♦♥♠'.indexOf(value.slice(-1)) * 13 + 'A234567891JQK'.indexOf(value.slice(0,1))  
 } 
 
 
