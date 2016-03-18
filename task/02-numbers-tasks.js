@@ -131,7 +131,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    return value.toString().slice(-1);
+    return value % 10;
 }
 
 
@@ -185,7 +185,8 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 1000
  */
 function roundToPowerOfTen(num, pow) {
-    return num.toFixed(pow);
+    var a = Math.pow(10, pow);
+    return Math.round(num / a) * a;
 }
 
 /**
@@ -244,6 +245,7 @@ module.exports = {
     getLastDigit: getLastDigit,
     parseNumberFromString: parseNumberFromString,
     getParallelipidedDiagonal: getParallelipidedDiagonal,
+    roundToPowerOfTen : roundToPowerOfTen,
     isPrime: isPrime,
     toNumber: toNumber
 };
