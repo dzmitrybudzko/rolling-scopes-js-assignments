@@ -351,7 +351,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   return (arr.length == 0) ? 0 :arr.reduce((sum, x) => sum + x);
+   return arr.reduce((sum, x) => sum + x, 0);
 }
  
 /** 
@@ -367,7 +367,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   return arr.filter(x => (x)?false:true).length;
+   return arr.filter(x => (!x)).length;
 }
 
 /**
@@ -385,7 +385,10 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   return arr.filter(x => x === item).length;
+   //return arr.filter(x => x === item).length;
+       return arr.reduce((prev, cur) => {
+        return prev + (cur === item);
+    }, 0);
 }
 
 /**
@@ -400,7 +403,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   return arr.join(",");
+   return arr.toString();
 }
 
 
