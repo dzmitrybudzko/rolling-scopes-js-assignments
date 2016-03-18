@@ -354,19 +354,26 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-var t = Date.parse(endDate) + new Date(endDate).getMilliseconds() - Date.parse(startDate) - new Date(startDate).getMilliseconds();
-
-   if (t <= 45000) return 'a few seconds ago';
-   if (t <= 90000) return 'a minute ago';
-   if (t <= 45*60*1000) return Math.round(t/(1000*60)) + ' minutes ago';
-   if (t <= 90*60*1000) return 'an hour ago';    
-   if (t <= 22*60*60*1000) return Math.round(t/(60*60*1000)) + ' hours ago';
-   if (t <= 36*60*60*1000) return 'a day ago';
-   if (t <= 25*24*60*60*1000) return Math.round(t/(24*60*60*1000)) + ' days ago';
-   if (t <= 45*24*60*60*1000) return 'a month ago';
-   if (t <= 345*24*60*60*1000) return Math.round(t/(30*24*60*60*1000)) + ' months ago';
-   if (t <= 545*24*60*60*1000) return 'a year ago';
-   if (t > 545*24*60*60*1000) return Math.round(t/(365*24*60*60*1000)) + ' years ago';
+        const minute = 60, hour = 60 * minute, day = 24*hour, month = 30*day, year = 365*day;
+        var delta = (endDate - startDate) / 1000;
+    
+        function myRound(num) {
+            if (num === 5.5) return 5;
+            if (num === 4.5) return 4;
+            return Math.round(num);   
+        }
+        
+        if (delta <= 45) return 'a few seconds ago';
+        if (delta <= 90) return 'a minute ago';
+        if (delta <= 45 * minute) return myRound(delta / minute) + ' minutes ago';
+        if (delta <= 90 * minute) return 'an hour ago';
+        if (delta <= 22 * hour) return myRound(delta / hour) + ' hours ago';
+        if (delta <= 36 * hour) return 'a day ago';
+        if (delta <= 25 * day) return myRound(delta / day) + ' days ago';
+        if (delta <= 45 * day) return 'a month ago';
+        if (delta <= 345 * day) return myRound(delta / month) + ' months ago';
+        if (delta <= 545 * day) return 'a year ago';
+        return myRound(delta / year) + ' years ago';
 }
 
 

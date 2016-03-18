@@ -498,10 +498,10 @@ it.optional('timespanToHumanString should return the human string representation
                 endDate:   '2000-01-01 01:01:30.001',
                 expected:  '2 minutes ago'
             }, {
-            //     startDate: '2000-01-01 01:00:00.000',
-            //     endDate:   '2000-01-01 01:05:30.000',
-            //     expected:  '5 minutes ago'
-            // },{
+                startDate: '2000-01-01 01:00:00.000',
+                endDate:   '2000-01-01 01:05:30.000',
+                expected:  '5 minutes ago'
+            },{
                 startDate: '2000-01-01T01:00:00.000',
                 endDate:   '2000-01-01T01:45:00.000',
                 expected:  '45 minutes ago'
@@ -521,10 +521,10 @@ it.optional('timespanToHumanString should return the human string representation
                 startDate: '2000-01-01T01:00:00.000',
                 endDate:   '2000-01-01T02:30:00.001',
                 expected:  '2 hours ago'
-            // },{
-            //     startDate: '2000-01-01T01:00:00.000',
-            //     endDate:   '2000-01-01T05:30:00.000',
-            //     expected:  '4 hours ago'
+            },{
+                startDate: '2000-01-01T01:00:00.000',
+                endDate:   '2000-01-01T05:30:00.000',
+                expected:  '4 hours ago'
             },{
                 startDate: '2000-01-01T01:00:00.000',
                 endDate:   '2000-01-01T05:30:00.001',
@@ -550,10 +550,10 @@ it.optional('timespanToHumanString should return the human string representation
                 endDate:   '2000-01-02T12:00:00.001',
                 expected:  '2 days ago'
             },{
-            //     startDate: '2000-01-01T00:00:00.000',
-            //     endDate:   '2000-01-05T12:00:00.000',
-            //     expected:  '4 days ago'
-            // },{
+                startDate: '2000-01-01T00:00:00.000',
+                endDate:   '2000-01-05T12:00:00.000',
+                expected:  '4 days ago'
+            },{
                 startDate: '2000-01-01T00:00:00.000',
                 endDate:   '2000-01-26T00:00:00.000',
                 expected:  '25 days ago'
