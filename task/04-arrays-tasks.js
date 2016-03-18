@@ -38,7 +38,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   return Array(len).fill(1).map((x,i) => 2*i + 1);
+   return Array.from({length:len},(x,i) => 2*i + 1)
 }
 
 
@@ -276,9 +276,11 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-     arr.map(function(x, ind){arr.splice(ind, 1, Array(ind+1).fill(x)); return arr});
-     return [].concat.apply([], arr);
-}
+     return arr.reduce((prev, cur, i) => {
+        var items = new Array(i + 1).fill(cur);
+        return prev.concat(items);
+       }, []);
+     }
 
 
 /** 
