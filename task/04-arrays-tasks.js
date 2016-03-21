@@ -433,7 +433,7 @@ function toStringList(arr) {
  */
 function sortCitiesArray(arr) {
    return arr.sort(function(a,b) {
-        return (a.country > b.country) - (a.country < b.country) ||  (a.city > b.city) - (a.city < b.city)
+        return (a.country).localeCompare(b.country) ||  (a.city).localeCompare(b.city)
     });
     
 }
@@ -457,13 +457,16 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   var arr = Array(n).fill(0);
-   arr.map(function(x, i){
-       arr.splice(i, 1, Array(n).fill(0).fill(1, i, i + 1));
-       return arr;
-   });
-   return arr;
+//    var arr = Array(n).fill([]);
+//    return arr.map((x, i) => 
+//       new Array(n).fill(0).fill(1, i, i + 1) 
+//       );
  
+   return Array.from({length:n}, (x,i) =>
+         Array.from({length:n}, (y,j) => 
+         (i==j) ? 1 : 0)
+         );
+   
 }
 
 /**
@@ -480,7 +483,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   return Array(end - start + 1).fill(start).map((x,i) => x + i);
+   return Array.from({length: end - start + 1}, (x,i) => start + i);
 }
 
 /**
@@ -571,10 +574,9 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    indexes.map(function(curr, i){
-        arr = arr[indexes[i]]
-    });
-    return arr;
+  return indexes.reduce(function(prev, cur) {
+        return prev[cur];
+    }, arr);
  }
 
 
@@ -597,10 +599,11 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    var len = arr.length;
-    if (len%2 == 0)  return arr.splice(len/2, len/2).concat(arr) ;
-    var arr1 = arr.splice((len-1)/2,1).concat(arr);
-    return arr1.splice((len + 1)/2,len/2).concat(arr1);
+    // var len = arr.length;
+    // if (len%2 == 0)  return arr.splice(len/2, len/2).concat(arr) ;
+    // var arr1 = arr.splice((len-1)/2,1).concat(arr);
+    // return arr1.splice((len + 1)/2,len/2).concat(arr1);
+    return arr.map((e, i) => arr[i < Math.floor(arr.length/2) ? Math.floor(arr.length/2) + i : i-Math.floor(arr.length/2)]);
 }
 
 
