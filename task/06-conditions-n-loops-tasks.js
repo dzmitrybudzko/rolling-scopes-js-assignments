@@ -525,24 +525,49 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    var win;
-   var check = position.some(function(a, i, arr){    
-      win = arr[i][0];
-      return (arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2] && arr[i][0] !== undefined) ;
-    });
-
-    if (check) return win;
-
-    check = position.some(function(a, i, arr){    
-      win = arr[0][i];
-      return (arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i] && arr[0][i] !== undefined) ;
-    });
-
-    if (check) return win;
-    if(position[0][0] === position[1][1] && position[1][1] === position[2][2] && position[2][2] !== undefined) return position[0][0];
-    if(position[0][2] === position[1][1] && position[1][1] === position[2][0] && position[2][2] !== undefined) return position[1][1];
+    var winCoords = [
+        [11,12,13], [21,22,23], [31,32,33],
+        [11,21,31], [12,22,32], [13,23,33],
+        [11,22,33], [13,22,31]
+    ];
+    var n = 3;
     
+    // put all symbol's positions in one-dimensional array
+    function transformMatrix(position, symb) {
+        var arr = [];
+        for(var i = 1; i <= n; i++){
+            for(var j = 1; j <= n; j++) {
+                winCoords[i][j] == arr[j];
+                if (position[i-1][j-1] == symb)
+                    arr.push(Number(i.toString() + j));
+            }
+        }
+        return arr;   
+    }
+    
+    // checks if every coordinate from winCoords matches arr (all positions of particular symbol) 
+    function isWin(arr, symb) {
+       for (var i = 0; i < winCoords.length; i++) {
+           var truth = 0;
+           for (var j = 0; j < n; j++) {
+                for (var k = 0; k < arr.length; k++ ) {
+                    if ( winCoords[i][j] == arr[k])
+                        truth += 1    
+                }
+           }
+           if (truth === 3) return symb; 
+       }
+    return false;    
+    }
+
+    var arr = transformMatrix(position, 'X');
+    if (isWin(arr, 'X')) return isWin(arr, 'X'); 
+    
+    arr = transformMatrix(position, '0');
+    if (isWin(arr, '0')) return isWin(arr, '0');
+
     return undefined;
+    
 }
 
 
