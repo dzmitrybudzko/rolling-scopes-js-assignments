@@ -598,13 +598,10 @@ function getElementByIndexes(arr, indexes) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]   
  * 
  */
-function swapHeadAndTail(arr) {
-    // var len = arr.length;
-    // if (len%2 == 0)  return arr.splice(len/2, len/2).concat(arr) ;
-    // var arr1 = arr.splice((len-1)/2,1).concat(arr);
-    // return arr1.splice((len + 1)/2,len/2).concat(arr1);
-    return arr.map((e, i) => arr[i < Math.floor(arr.length/2) ? Math.floor(arr.length/2) + i : i-Math.floor(arr.length/2)]);
-}
+  function swapHeadAndTail(arr) {
+    var middle = Math.ceil(arr.length/2) - 1;
+    return arr.map((x, i) => arr[i <= middle ? ((i==middle && arr.length%2!=0) ? i : middle + i + 1) : (i - middle - 1)]);
+  }
 
 
 module.exports = {
