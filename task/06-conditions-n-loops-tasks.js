@@ -201,7 +201,11 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    var out = ((isStartIncluded)?'[':'(').concat((a < b)?a + ', ' + b : b +', ' + a).concat((isEndIncluded)?']':')');
+    var out = '';
+    out += (isStartIncluded)? '[' : '(' ;
+    if (a < b) out +=  a + ', ' + b ;  
+    if (a >=b) out +=  b +', ' + a ; 
+    out += (isEndIncluded) ? ']' : ')' ;
     return out;
 }
 
@@ -236,7 +240,12 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    return parseInt(num.toString().split('').reverse().join(''));
+    var b = 0;
+    while (num > 0) {
+        b = (b + num % 10) * 10;
+        num = parseInt( num / 10 );
+    }
+    return b / 10
 }
 
 
@@ -261,12 +270,24 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    var arr = ccn.toString().split('').reverse(); 
-    arr = arr.map(function(x,i){
-        if (i%2 !== 0)   return (2*x > 9) ? 2*x - 9 : 2*x;
-        return x;
-    });
-    return arr.reduce((a, b)=> Number(a) + Number(b)) %10 === 0;
+    var arr = [];
+    // transform a number into array and reverse it
+    while (ccn > 0) {
+        arr.push(ccn % 10);
+        ccn = parseInt( ccn / 10 );    
+    }
+    
+    // validation of CCN
+    for( var i = 0; i < arr.length; i++) {
+        var el = arr[i];
+        if (i%2 !== 0)   {
+            if (2*el > 9) {
+                arr[i] = 2*el - 9 
+            } else { arr[i] = 2*el }
+        }
+    };
+
+    return arr.reduce((a, b) => a + b) %10 === 0;
 }
 
 
@@ -287,8 +308,12 @@ function isCreditCardNumber(ccn) {
 function getDigitalRoot(num) {
     if (num < 9) 
         return num ;
-    num = num.toString().split('').reduce((a,b)=>Number(a)+Number(b));
-    return getDigitalRoot(num);
+    var sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num = parseInt(num/10);
+    } 
+    return getDigitalRoot(sum);
     
   }
 
