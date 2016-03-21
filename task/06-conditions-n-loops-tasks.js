@@ -30,7 +30,10 @@
  *
  */
 function getFizzBuzz(num) {
-    return (num%15==0) ? 'FizzBuzz' : (num%5==0) ? 'Buzz' : (num%3==0) ? 'Fizz' : num; 
+    if (num%15==0) return 'FizzBuzz'; 
+    if (num%5==0) return 'Buzz';
+    if (num%3==0) return 'Fizz';
+    return num; 
 }
 
 
@@ -82,7 +85,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    return a + b > c && a + c > b && b + c > a;
+    return (a + b > c) && (a + c > b) && (b + c > a);
 }
 
 
@@ -117,17 +120,16 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(a, b) {
-    function isInsideRectangleA(x,y) {
-        return (x >= a.left && x <= a.left + a.width && y >= a.top && y <= a.top + a.height);    
-    }  
-    function isInsideRectangleB(x,y) {
-        return (x >= b.left && x <= b.left + b.width && y >= b.top && y <= b.top + b.height);    
+
+    function isOutsideRectangleA(x,y) {
+        return (!(x < a.left || x > a.left + a.width) && !(y < a.top || y > a.top + a.height));    
     }
-    return isInsideRectangleB(a.left, a.top) || isInsideRectangleB(a.left + a.width, a.top) 
-    || isInsideRectangleB(a.left, a.top + a.height) || isInsideRectangleB(a.left + a.width, a.top + a.height)
-    || isInsideRectangleA(b.left, b.top) || isInsideRectangleA(b.left + b.width, b.top) 
-    || isInsideRectangleA(b.left, b.top + b.height) || isInsideRectangleA(b.left + b.width, b.top + b.height);
-}
+    function isOutsideRectangleB(x,y) {
+        return (!(x < b.left || x > b.left + b.width) && !(y < b.top || y > b.top + b.height));    
+    }  
+    return isOutsideRectangleA(b.left, b.top) || isOutsideRectangleA(b.left + b.width, b.top + b.height) 
+        || isOutsideRectangleB(a.left, a.top) || isOutsideRectangleB(a.left + a.width, a.top + a.height);
+ }
 
 
 /**
@@ -157,7 +159,7 @@ function doRectanglesOverlap(a, b) {
  *   
  */
 function isInsideCircle(circle, point) {
-    return (point.x-circle.center.x)*(point.x-circle.center.x) + (point.y-circle.center.y)*(point.y-circle.center.y) < circle.radius*circle.radius;
+    return Math.hypot( (point.x-circle.center.x), (point.y-circle.center.y) ) < circle.radius;
 }
 
 
