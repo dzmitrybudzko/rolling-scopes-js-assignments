@@ -340,12 +340,20 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
- if (str.length === 0) return true;
- var ind = Math.max(str.lastIndexOf('['), str.lastIndexOf('{'), str.lastIndexOf('('),str.lastIndexOf('<'));
- var nextChar = (str.charAt(ind) === '(') ? ')' : String.fromCharCode(str.charCodeAt(ind)+2);
- if (str.charAt(ind+1) !== nextChar) return false;
- str = str.substring(0,ind) + str.substring(ind+2);
- return isBracketsBalanced(str) 
+    var stack = [];
+    var open = ['[', '(', '<', '{'];
+    var close = [']', ')', '>', '}'];
+
+    for (var i = 0; i < str.length; i++) {     
+        if (open.indexOf(str[i]) != -1) {
+            stack.push(str[i]);
+            continue
+        }
+        
+        if (open.indexOf(stack.pop()) != close.indexOf(str[i]))  return false;
+    }
+    
+    return !stack.length;
 }
 
 
@@ -385,22 +393,21 @@ function timespanToHumanString(startDate, endDate) {
         var delta = (endDate - startDate) / 1000;
     
         function myRound(num) {
-            if (num === 5.5) return 5;
-            if (num === 4.5) return 4;
-            return Math.round(num);   
+            if (num - Math.floor(num) > 0.5) return Math.round(num);
+            return Math.floor(num);   
         }
         
         if (delta <= 45) return 'a few seconds ago';
         if (delta <= 90) return 'a minute ago';
-        if (delta <= 45 * minute) return myRound(delta / minute) + ' minutes ago';
+        if (delta <= 45 * minute) return `${myRound(delta / minute)} minutes ago`;
         if (delta <= 90 * minute) return 'an hour ago';
-        if (delta <= 22 * hour) return myRound(delta / hour) + ' hours ago';
+        if (delta <= 22 * hour) return `${myRound(delta / hour)} hours ago`;
         if (delta <= 36 * hour) return 'a day ago';
-        if (delta <= 25 * day) return myRound(delta / day) + ' days ago';
+        if (delta <= 25 * day) return `${myRound(delta / day)} days ago`;
         if (delta <= 45 * day) return 'a month ago';
-        if (delta <= 345 * day) return myRound(delta / month) + ' months ago';
+        if (delta <= 345 * day) return `${myRound(delta / month)} months ago`;
         if (delta <= 545 * day) return 'a year ago';
-        return myRound(delta / year) + ' years ago';
+        return `${myRound(delta / year)} years ago`;
 }
 
 
@@ -441,15 +448,15 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    var common = '';
+    var out;
     for (var i = 0; i < pathes[0].length; i++ ) {
         for (var j = 1; j < pathes.length; j++) {
-            if (pathes[0].charAt(i) !== pathes[j].charAt(i))
-                return common.substring(0, common.lastIndexOf('/')+1); 
+            if (pathes[0].charAt(i) !== pathes[j].charAt(i)) {
+                out = pathes[0].substring(0, i);
+                return out.substring(0, out.lastIndexOf('/') + 1 || '');
+            }             
         }
-        common = common + pathes[0].charAt(i);
     }
-    return common.substring(0, common.lastIndexOf('/')+1);
 }
 
 
