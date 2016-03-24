@@ -177,7 +177,8 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
-    throw new Error('Not implemented');
+    // if sum of all bones is odd return true, otherwise false
+    return dominoes.map(x => x[0] + x[1]).reduce((prev, cur) => prev + cur) %2 != 0
 }
 
 
@@ -201,7 +202,22 @@ function canDominoesMakeRow(dominoes) {
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    var out = '';
+    
+    for (var i = 0; i <nums.length; i++) {
+        var j = i;
+        
+        while ((nums[j] === nums[j + 1] - 1)) 
+            j++
+        
+        if (i === j)  out +=`${nums[i]},`       //if there is the next number is not successive
+            else { 
+                if(i === j - 1) out +=`${nums[i]},${nums[i + 1]},`   // if there is a range of two successive numbers
+                    else out += `${nums[i]}-${nums[j]},`;            // if there is a range of 3 or more successive numbers
+                i = j;      
+               };
+    }
+    return out.slice(0,-1); //remove last comma
 }
 
 module.exports = {
