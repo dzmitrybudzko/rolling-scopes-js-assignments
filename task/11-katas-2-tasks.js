@@ -34,7 +34,34 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+    bankAccount = bankAccount.replace(/\n/gm,"");
+ 
+    function separateSymbolsForOneNumber(str, j) {
+        var lineLength = 27;
+        return str.substr(j*3, 3) + str.substr(j*3 + lineLength, 3) + str.substr(j*3 + 2*lineLength, 3) ;
+    }
+    
+    var num, out  = '';
+    for (var j = 0; j < 9; j++) {
+        var str = separateSymbolsForOneNumber(bankAccount, j); //every number is presented by 9 symbols
+        
+        if (str[1] !== '_') {
+            if (str[3] === '|') num = 4;
+                else num = 1; }
+            else if (str[7] !== '_') num = 7
+                 else if (str[3] !== '|') {
+                        if(str[6] == '|') num = 2
+                            else num = 3
+                        } else if(str[5] !== '|') {
+                                if(str[6] !== '|') num=5
+                                    else num = 6
+                                } else if (str[6] === '|') { 
+                                    if(str[4] === '_') num = 8
+                                        else num = 0 }
+                                    else num = 9;
+        out += num;
+    }
+    return Number(out);
 }
 
 
@@ -63,7 +90,16 @@ function parseBankAccount(bankAccount) {
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-    throw new Error('Not implemented');
+    while (text) {
+        var cursor = columns;
+
+        if (text.length > cursor)
+            while (text[cursor] != " ")
+                cursor--;
+        
+        yield text.slice(0, cursor);
+        text = text.slice(cursor + 1);
+    }    
 }
 
 
