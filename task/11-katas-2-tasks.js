@@ -134,9 +134,111 @@ const PokerRank = {
     OnePair: 1,
     HighCard: 0
 }
+function PokerTools() {
+    // var suits = ['♥','♦','♠','♣'];
+    // var ranks = ['A','2','3','4','5','6','7','8','9','1','J','Q',"K"];
+      
+    function returnOne(char, hand, suitOrRank) {
+        hand = hand.map(x => x.replace('10', '1'));
+        return hand.reduce((prev, cur) => prev + ((cur[suitOrRank] === char) ? 1 : 0), 0);
+    }    
+        
+    this.returnSuits = function(hand) {
+        return {'♥' : returnOne('♥', hand, 1),
+                '♦' : returnOne('♦', hand, 1),
+                '♠' : returnOne('♠', hand, 1),
+                '♣' : returnOne('♣', hand, 1)}    
+    }
+    
+    this.returnRanks = function(hand) {
+        return {'A' : returnOne('A', hand, 0),
+                '2' : returnOne('2', hand, 0),
+                '3' : returnOne('3', hand, 0),
+                '4' : returnOne('4', hand, 0),
+                '5' : returnOne('5', hand, 0),
+                '6' : returnOne('6', hand, 0),
+                '7' : returnOne('7', hand, 0),
+                '8' : returnOne('8', hand, 0),
+                '9' : returnOne('9', hand, 0),
+                '1' : returnOne('1', hand, 0),
+                'J' : returnOne('J', hand, 0),
+                'Q' : returnOne('Q', hand, 0),
+                'K' : returnOne('K', hand, 0)}
+    }
+    
+    function getCardValue(a, AceAsLow) {
+        if (!a) return 0;
+        if (a[0] === 'A') return AceAsLow ? 1 : 14;
+        if (a[0] === '1') return 10;
+        if (a[0] === 'J') return 11;
+        if (a[0] === 'Q') return 12;
+        if (a[0] === 'K') return 13;
+        return a[0];
+    }
+            
+    function sortForStraight(hand, AceAsLow) {
+        return hand.sort(function(a, b){
+            return getCardValue(a, AceAsLow) - getCardValue(b, AceAsLow)
+        })
+    }
+    
+    this.isStraight = function(hand) {
+        // if Ace values 1
+        hand = sortForStraight(hand, true);
+        var val1 = hand.every((x,i,hand) =>
+            + getCardValue(hand[i], true) + 1 === + ( getCardValue(hand[i + 1], true) || 1 + + getCardValue(hand[i], true) )
+            );
+        
+        // if Ace values 14
+        hand = sortForStraight(hand, false);
+        var val2 = hand.every((x,i,hand) => 
+            + getCardValue(hand[i], false) + 1 === + ( getCardValue(hand[i + 1], false) || 1 + + getCardValue(hand[i], false) )
+            );
+        return val1 || val2;
+    }
+}
 
 function getPokerHandRank(hand) {
-    throw new Error('Not implemented');
+  var PT = new PokerTools();
+  var arrayOfPokerRanks = [];
+  var suits = PT.returnSuits(hand);
+  var ranks = PT.returnRanks(hand);
+  var straight = PT.isStraight(hand);
+
+  for(var key in suits) {
+      if (suits[key] === 5)
+          arrayOfPokerRanks.push(5);     // FLUSH
+      if ( straight && suits[key] === 5)
+          arrayOfPokerRanks.push(8)     // STRAIGHT FLUSH
+  }
+  
+  if (straight)
+      arrayOfPokerRanks.push(4);        // STRAIGHT
+          
+  var b =0;
+  for(var key in ranks) {
+      if (ranks[key] === 2)
+          arrayOfPokerRanks.push(1);    // ONE_PAIR
+      if (ranks[key] === 3)
+          arrayOfPokerRanks.push(3);    // THREE_OF_KIND
+      if (ranks[key] === 4)
+          arrayOfPokerRanks.push(7);    // FOUR_OF_KIND
+      
+      if (ranks[key] === 2) b += 2;
+      if (ranks[key] === 3) b += 3;          
+  }
+
+  if (b == 4)
+      arrayOfPokerRanks.push(2);        // TWO_PAIRS
+  if (b == 5)
+      arrayOfPokerRanks.push(6);        // FULL_HOUSE
+  
+  var numberOfRank;
+  if (!arrayOfPokerRanks.length)
+        numberOfRank = 0                // HIGH_CARD
+     else
+        numberOfRank = Math.max.apply(null, arrayOfPokerRanks);
+  return numberOfRank;
 }
 
 
