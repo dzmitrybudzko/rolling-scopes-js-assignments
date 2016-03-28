@@ -27,7 +27,74 @@
  *   'NULL'      => false 
  */
 function findStringInSnakingPuzzle(puzzle, searchStr) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    
+    function findFirstLetters(puzzle, symbol) {
+      var arr = [];
+      puzzle.forEach((x,i) => {
+          var k = 0;
+          while(k < x.length) {
+              if (x[k] === symbol)
+                  arr.push({row: i, col: k})
+              k++
+          }
+      });  
+      return arr;
+    }
+    
+    function isSnakeCrossItself(path) {
+        return path.filter((x, i, path) => path.indexOf(x) == i).length === path.length;
+    }
+    
+    function uniqueIndex(a, b) {
+        return Math.pow(2, a) * Math.pow(3, b);    
+    }
+    
+    function search(puzzle, row, col, searchStr, k, path) {
+
+        while( k < searchStr.length ) {
+            var testDown =  (row !== puzzle.length - 1) 
+            var testUp = (row !== 0);
+            
+            if ( puzzle[row][col + 1] === searchStr[k] ) {
+                k++;
+                col = col + 1;
+                path.push(uniqueIndex(row, col));
+                return search(puzzle, row, col, searchStr, k, path)
+            } else if (puzzle[row][col - 1] === searchStr[k] ) {
+                k++
+                col = col - 1;
+                path.push(uniqueIndex(row, col));
+                return search(puzzle, row, col, searchStr, k, path)
+            } else if ( testDown && puzzle[row + 1][col] === searchStr[k]) {
+                k++
+                row = row + 1;
+                path.push(uniqueIndex(row, col));
+                return search(puzzle, row, col, searchStr, k, path)
+            } else if ( testUp && puzzle[row - 1][col] === searchStr[k] ) {
+                k++
+                row = row - 1;
+                path.push(uniqueIndex(row, col));
+                return search(puzzle, row, col, searchStr, k, path)
+            }
+              else 
+                return false;
+        }
+        return isSnakeCrossItself(path)
+    }
+ 
+    
+    var firstLetters = findFirstLetters(puzzle, searchStr[0]);
+    
+    for(var j = 0; j < firstLetters.length; j++) {
+        var value = [];
+        value.push(uniqueIndex(firstLetters[j].row, firstLetters[j].col)); 
+
+        if ( search(puzzle, firstLetters[j].row, firstLetters[j].col, searchStr, 1, value) )
+            return true;
+    }
+    return false;
+    
 }
 
 

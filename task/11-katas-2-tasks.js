@@ -272,8 +272,85 @@ function getPokerHandRank(hand) {
  *    '|             |\n'+              '+-----+\n'           '+-------------+\n'
  *    '+-------------+\n'
  */
+
+function HandleRectangles() {
+
+    this.reduceToMatrix = function(figure) {
+        var fig = figure.slice(), 
+            n = fig.indexOf('\n') + 1,
+            m = fig.length / n,
+            matr = Array(m).fill([]).map(x => Array(n).fill(0)), 
+            i = 0,
+            j = 0;       
+      
+        for(var count = 0; count < n*m; count++, i++) {
+           if (fig[count] === '\n') {
+               j++;
+               i = i - n;
+           }
+           if (fig[count] === '+')
+               matr[j][i] = 1;
+           if (fig[count] === '-' || fig[count] === '|')
+               matr[j][i] = 2
+        }
+        return matr;
+    }
+    
+    this.findRectangle = function(arr, i, j) {
+         if (arr[j][i] === 1) {
+            var obj = isRectangle(arr, i, j);
+            if (obj)
+                return formRectangle(i, j, obj.width, obj. height);   //return string
+         }
+   } 
+   
+   function isRectangle(arr, i, j) {
+        var w, h;
+        var m = arr.length,
+            n= arr[0].length;
+          
+          w = i + 1;
+          while (w < n) { 
+            
+            while (arr[j][w] === 2 && w < n)
+                w++;
+
+            h = j + 1;
+            while (h < m && arr[h][i] === 2)
+                h++;
+        
+            if ( h < m && arr[h][w] === 1 && 
+                    (arr[h-1][w] === 2 || arr[h-1][w] === 1) )
+                        return { width: w, height: h };
+            
+            if(w === i + 1)
+                break;
+            w++
+          }
+        return false;
+   }
+   
+   function formRectangle(a, b, c, d) {
+        return '+' + '-'.repeat(c - a - 1) + '+' + '\n' +
+                ('|' + ' '.repeat(c - a - 1) + '|' + '\n').repeat(d - b - 1) +
+                  '+' + '-'.repeat(c - a - 1) + '+' + '\n';
+   }
+   
+}
+
 function* getFigureRectangles(figure) {
-   throw new Error('Not implemented');
+ 
+   var hr = new HandleRectangles();
+   var arr = hr.reduceToMatrix(figure);
+   var m = arr.length,
+       n= arr[0].length; 
+   for(var j = 0; j < m; j++) {      
+       for(var i = 0; i < n; i++) {   
+            var val = hr.findRectangle(arr, i, j);
+            if (val)
+                yield val;
+       }
+   }
 }
 
 
