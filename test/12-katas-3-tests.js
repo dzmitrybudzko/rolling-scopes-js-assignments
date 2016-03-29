@@ -35,7 +35,7 @@ describe('12-katas-3-tasks', function() {
     });
 
 
-    it.optional('getPermutations should return all possible string permutations', () => {
+   it.optional('getPermutations should return all possible string permutations', () => {
         [
             {
                 chars:    'a',
@@ -50,7 +50,7 @@ describe('12-katas-3-tasks', function() {
                 chars:    'abcd',
                 expected: [ 
                     'abcd', 'abdc', 'acbd', 'acdb', 'adbc', 'adcb', 
-                    'bacd', 'badc', 'bdac', 'bdca', 'bcad', 'bcda', 
+                    'bacd', 'badc', 'bcad', 'bcda', 'bdac', 'bdca', 
                     'cabd', 'cadb', 'cbad', 'cbda', 'cdab', 'cdba', 
                     'dabc', 'dacb', 'dbac', 'dbca', 'dcab', 'dcba'
                 ]

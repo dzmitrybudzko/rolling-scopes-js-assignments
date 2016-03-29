@@ -111,7 +111,38 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
  *    'abc' => 'abc','acb','bac','bca','cab','cba'
  */
 function* getPermutations(chars) {
-    throw new Error('Not implemented');
+  // Johnson -Trotter algorithm
+  
+  var arr = chars.split(''),
+     n = arr.length,
+     d = Array(n).fill(-1);    // - 1 means left arrow, 1 means right arrow
+  
+  function swap(a) {
+    var b = a + d[a];
+    var tmp = arr[a],   tmpd = d[a];
+    arr[a] = arr[b];    d[a] = d[b];
+    arr[b] = tmp;       d[b] = tmpd;
+  }
+  
+  function isMobile(i) {
+     return ( d[i] < 0 && arr[i - 1] < arr[i] ) || ( d[i] > 0 && arr[i + 1] < arr[i] ) ;
+  }
+  
+  while (true) {
+    yield arr.join('');
+    
+    var id = -1;                    
+    for (var i = 0; i < n; i++)
+       if (isMobile(i) && ((id == -1) || (arr[i] > arr[id])) )
+         id = i;
+  
+    if (id == -1) break;
+    for (var i = 0; i < n; i++) 
+      if (arr[i] > arr[id]) 
+        d[i] = (d[i] > 0) ? -1 : 1  //change direction 
+    
+    swap(id)
+  }
 }
 
 
