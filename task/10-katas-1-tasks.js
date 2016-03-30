@@ -101,7 +101,30 @@ function createCompassPoints() {
  *   'nothing to do' => 'nothing to do'
  */
 function* expandBraces(str) {
-    throw new Error('Not implemented');
+    
+    var store = [str],
+        a, matchList, arr,
+        regex = "\{([\\w,]{1,})\}";
+        
+        while(1) {
+            a = store.shift();
+            matchList = a.match(regex);
+            
+            if(matchList == null) {
+                store.push(a);
+                break;
+            }
+        
+            arr = matchList[1].split(',');
+
+            for(var i = 0; i < arr.length; i++)
+                store.push(a.replace(matchList[0], arr[i]));
+        }
+    
+    store = store.filter((x, i, store) => store.indexOf(x) == i)        // remove duplicates
+    
+    while (store.length)
+       yield store.pop();
 }
 
 
