@@ -162,7 +162,13 @@ function* getPermutations(chars) {
  *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
  */
 function getMostProfitFromStockQuotes(quotes) {
-    throw new Error('Not implemented');
+    var maxRight = quotes[quotes.length - 1];
+
+    return quotes.reduceRight(function(prev, cur, i) {
+                        
+        maxRight = Math.max(maxRight, cur);
+        return prev + (maxRight - cur);     // added profit is nonzero if there is greater element to the right
+    }, 0); 
 }
 
 
@@ -184,17 +190,82 @@ function UrlShortener() {
     this.urlAllowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+
                            "abcdefghijklmnopqrstuvwxyz"+
                            "0123456789-_.~!*'();:@&=+$,/?#[]";
+    this.SEVEN = 7;
+    this.THIRTEEN = 13;     // 13 is enough to reach minimum compression 1.5
+
+    var allChars = this.urlAllowedChars;
+    this.myMap1 = new Map();
+    
+    for(var i = 0; i < allChars.length; i++) { 
+        let e = i.toString(2);              // to binary
+        e = addZerosBefore(e, this.SEVEN);
+        this.myMap1.set(allChars[i], e);
+    }
+    this.myMap1.set(' ', (allChars.length).toString(2));
+    
+    this.myMap2 = new Map();   
+    const START = 14000;     // start of hieroglyphs in unicode             
+    
+    for(var i = START; i < START + Math.pow(2, this.THIRTEEN); i++) {    // Range of symbols: [14000; 22192],   2^13 = 8192
+        let e = (i - START).toString(2);      
+        e = addZerosBefore(e, this.THIRTEEN);
+        this.myMap2.set(String.fromCharCode(i), e);
+    }
+    
+    function addZerosBefore(e, bit) {
+        while(e.length < bit)        // add zeros to the start in order 110 be 0000110
+            e = '0' + e;
+        return e;
+    }
 }
 
 UrlShortener.prototype = {
-
-    encode: function(url) {
-        throw new Error('Not implemented');
-    },
+   
+   encode: function(url) {
     
-    decode: function(code) {
-        throw new Error('Not implemented');
-    } 
+    // we add whitespaces to the end of url, in order url.length % 13 === 0
+    var numberOfRequiredSpaces = this.THIRTEEN*(parseInt(url.length/this.THIRTEEN) + 1) - url.length;
+    url = url + ' '.repeat(numberOfRequiredSpaces);
+    
+    var str = '';
+    for(var i = 0; i < url.length; i++)
+        str += this.myMap1.get(url[i]);
+
+    var arr = str.split('');
+    var out = '';
+    
+    while(arr.length) {
+
+        for(var k of this.myMap2.keys())
+            if(this.myMap2.get(k) === arr.slice(0, this.THIRTEEN).join('')) {
+                out += k;
+                arr.splice(0, this.THIRTEEN)
+            }
+    }
+    
+    return out
+   },
+    
+   decode: function(code) {
+       var str = '';
+       for (var i = 0; i < code.length; i++) {
+           str += this.myMap2.get(code[i]);
+       }
+      
+       var arr = str.split('');
+       var out = ''; 
+            
+       while(arr.length) {
+     
+            for(var k of this.myMap1.keys())
+                if(this.myMap1.get(k) === arr.slice(0, this.SEVEN).join('')) {
+                    out += k;
+                    arr.splice(0, this.SEVEN)
+                }
+       }
+
+       return out.trim();
+   }       
 }
 
 
